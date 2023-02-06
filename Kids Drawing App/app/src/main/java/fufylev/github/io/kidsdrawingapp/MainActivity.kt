@@ -2,12 +2,17 @@ package fufylev.github.io.kidsdrawingapp
 
 import android.app.Dialog
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
 
 class MainActivity : AppCompatActivity() {
 
     private var drawingView: DrawingView? = null
+    private var mImageBtnCurrentPaint: ImageButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,6 +20,15 @@ class MainActivity : AppCompatActivity() {
 
         drawingView = findViewById(R.id.drawing_view)
         drawingView?.setSizeForBrush(10.toFloat())
+
+        val linearLayoutPainColors = findViewById<LinearLayout>(R.id.ll_color_paint)
+        mImageBtnCurrentPaint = linearLayoutPainColors[1] as ImageButton
+        mImageBtnCurrentPaint!!.setImageDrawable(
+            ContextCompat.getDrawable(
+                this,
+                R.drawable.pallet_pressed
+            )
+        )
 
         val brushBtn: ImageButton = findViewById(R.id.ib_brush)
         brushBtn.setOnClickListener {
@@ -47,5 +61,30 @@ class MainActivity : AppCompatActivity() {
         }
 
         brushDialog.show()
+    }
+
+    fun paintClick(view: View) {
+        println("paintClick")
+        if (view !== mImageBtnCurrentPaint) {
+            val imageBtn = view as ImageButton
+            val tag = imageBtn.tag.toString()
+
+            drawingView?.setColor(tag)
+
+            imageBtn.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.pallet_pressed
+                )
+            )
+            mImageBtnCurrentPaint?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.pallet_normal
+                )
+            )
+
+            mImageBtnCurrentPaint = view
+        }
     }
 }

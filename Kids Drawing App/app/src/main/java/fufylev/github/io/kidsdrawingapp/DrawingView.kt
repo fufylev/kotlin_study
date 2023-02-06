@@ -1,5 +1,6 @@
 package fufylev.github.io.kidsdrawingapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
@@ -30,7 +31,6 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         mDrawPaint!!.strokeJoin = Paint.Join.ROUND
         mDrawPaint!!.strokeCap = Paint.Cap.ROUND
         mCanvasPaint = Paint(Paint.DITHER_FLAG)
-//        mBrushSize = 20.toFloat()
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -60,6 +60,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         val touchX = event?.x
         val touchY = event?.y
@@ -98,6 +99,11 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         )
 
         mDrawPaint!!.strokeWidth = mBrushSize
+    }
+
+    fun setColor(newColor: String) {
+        color = Color.parseColor(newColor)
+        mDrawPaint!!.color = color
     }
 
     internal inner class CustomPath(var color: Int, var brushThickness: Float) : Path() {}
