@@ -23,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/image"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/bg_image" />
 
         <fufylev.github.io.kidsdrawingapp.DrawingView
             android:id="@+id/drawing_view"
@@ -37,7 +38,7 @@
         android:id="@+id/ll_color_paint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/ib_brush"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_ll_of_buttons"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fl_drawing_view_container"
@@ -124,15 +125,34 @@
             android:background="@color/random" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/ib_brush"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:src="@drawable/ic_brush"
-        android:scaleType="fitXY"
+    <LinearLayout
+        android:id="@+id/bottom_ll_of_buttons"
         app:layout_constraintTop_toBottomOf="@+id/ll_color_paint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:id="@+id/ib_gallery"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="3dp"
+            android:src="@drawable/ic_gallery"
+            android:scaleType="fitXY"
+            android:contentDescription="@string/todo" />
+
+        <ImageButton
+            android:id="@+id/ib_brush"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_brush"
+            android:scaleType="fitXY"
+            android:contentDescription="@string/todo" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
